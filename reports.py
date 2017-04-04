@@ -39,12 +39,10 @@ def get_line_number_by_title(file_name, title):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        try:
-            for i in range(len(data_list)):
-                if title == data_list[i][0]:
-                    return i + 1
-        except:
-            raise ValueError("akk")
+        for i in range(len(data_list)):
+            if title == data_list[i][0]:
+                return i + 1
+        raise ValueError("Title doesn't exist!! Stupid cow!!! RETARDED function on!")
 
 
 def sort_abc(file_name):
