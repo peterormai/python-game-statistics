@@ -1,20 +1,32 @@
 import reports
+import os.path
 
-# filename="answers.txt"
+
+default_data_dict = {'data_file': 'game_stat.txt', 'year': '1999',
+                     'genre': 'Action-adventure', 'title': 'Minecraft', 'exported': 'answers.txt'}
+
+# mi van ha rosszakat v semmit adnak meg, MI van ha nincs olyan inport fájl
+# valueerror
+# feladat kiírás
 
 
-def data_input():
+def data_input_dict():
     import_name = input('Please give me the name of the data file: ')
+    while True:
+        if not os.path.exists(import_name):
+            import_name = input('It is not exist, try again:  ')
+        else:
+            break
     given_year = input("Give me a year an I'll check if it is in the data file: ")
     given_genre = input("Give me the genre I'll tell you how many is in the data file: ")
     given_title = input("Give me the title I'll tell you which line it is in: ")
     export_file_name = input('Please, give me the name of the export file of the answers: ')
-    data_input_dict = {'data_file': import_name, 'year': given_year,
-                       'genre': given_genre, 'title': given_title, 'exported': export_file_name}
-    return data_input_dict
+    data_dict = {'data_file': import_name, 'year': given_year,
+                 'genre': given_genre, 'title': given_title, 'exported': export_file_name}
+    return data_dict
 
 
-def export_answers(data_dict):
+def export_answers(data_dict=default_data_dict):
     with open(data_dict['exported'], 'w') as file:
         file.write(str(reports.count_games(data_dict['data_file'])) + "\n" +
                    str(reports.decide(data_dict['data_file'], data_dict['year'])) + "\n" +
@@ -27,7 +39,7 @@ def export_answers(data_dict):
 
 
 def main():
-    export_answers(data_input())
+    export_answers(data_input_dict())
     print("Export was successfull!")
 
 
