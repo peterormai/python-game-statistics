@@ -82,14 +82,4 @@ def when_was_top_sold_fps(file_name):
                 counter = float(collect[i][1])
         for item in collect:
             if float(item[1]) == counter:
-                return float(item[2])
-
-
-print(get_genres('game_stat.txt'))
-
-# def count_games(file_name):
-#     with open(file_name, 'r') as data:
-#         data_list = data.read().splitlines()
-#         # data_list = [item.replace("\t", ",") for item in data_list]
-#         data_list = [item.split('\t') for item in data_list]
-#         return len(data_list)
+                return int(item[2])
