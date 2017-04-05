@@ -42,7 +42,7 @@ def get_line_number_by_title(file_name, title):
         for i in range(len(data_list)):
             if title == data_list[i][0]:
                 return i + 1
-        raise ValueError("Title doesn't exist!! Stupid cow!!! RETARDED function on!")
+        raise ValueError("Title doesn't exist!!")
 
 
 def sort_abc(file_name):
@@ -81,3 +81,4 @@ def when_was_top_sold_fps(file_name):
         for item in collect:
             if float(item[1]) == counter:
                 return int(item[2])
+        raise ValueError("Title doesn't exist!!")
