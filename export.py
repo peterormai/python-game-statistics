@@ -11,7 +11,7 @@ def data_input_dict():
     file_exist = 0
     while file_exist == 0:
         if not os.path.exists(import_name):
-            import_name = input('File does not exist, try again:  ')
+            import_name = input('File does not exist, try again: ')
         else:
             file_exist = 1
     given_year = input("Give me a year and I'll check if it is in the data file: ")
