@@ -37,9 +37,11 @@ def export_answers(data_dict=default_data_dict):
         print("Export was successfull!")
     except UnboundLocalError:
         data_dict['title'] = default_data_dict['title']
+        print("Wrong title! I will use the default value!")
         export_answers(data_dict)
     except FileNotFoundError:
         data_dict['exported'] = default_data_dict['exported']
+        print("Wrong export file name! You can find the answers in the {0} file!".format(default_data_dict['exported']))
         export_answers(data_dict)
 
 
