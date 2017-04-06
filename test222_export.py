@@ -43,10 +43,14 @@ def exporter(export_file_name, *args):
         #    str(reports.count_grouped_by_genre(data_dict['data_file'])) + "\n" +
         #    str(reports.get_date_ordered(data_dict['data_file'])))
 
+# mainbe argument???
 
-def main():
-    exporter(export_name(), title_input(data_input_name()), year_input(data_input_name()))
+
+def main(data_file):
+    exporter(export_name(),
+             title_input(data_file),
+             year_input(data_file))
 
 
 if __name__ == '__main__':
-    main()
+    main(data_input_name())
