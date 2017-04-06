@@ -14,9 +14,7 @@ def sum_sold(file_name):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        sum_sold_value = 0
-        for item in data_list:
-            sum_sold_value += float(item[1])
+        sum_sold_value = sum([float(item[1]) for item in data_list])
         return sum_sold_value
 
 
@@ -24,12 +22,8 @@ def get_selling_avg(file_name):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        sum_sold_value = 0
-        number_of_games = 0
-        for item in data_list:
-            sum_sold_value += float(item[1])
-            number_of_games += 1
-        return (sum_sold_value / number_of_games)
+        sum_sold_value = sum([float(item[1]) for item in data_list])
+        return (sum_sold_value / len(data_list))
 
 
 def count_longest_title(file_name):
@@ -44,25 +38,50 @@ def get_date_avg(file_name):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        sum_years = 0
-        number_of_games = 0
-        for item in data_list:
-            sum_years += float(item[2])
-            number_of_games += 1
-        return int(-(-sum_years // number_of_games))
+        sum_years = sum([int(item[2]) for item in data_list])
+        return int(-(-sum_years // len(data_list)))
 
 
 def get_game(file_name, title):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        properties = [item for item in data_list if item[0] == title]
-        pro_list = properties[0]
-        pro_list[1] = float(pro_list[1])
-        pro_list[2] = int(pro_list[2])
-        return pro_list
+        for item in data_list:
+            if item[0] == title:
+                properties = item
+        properties[1] = float(properties[1])
+        properties[2] = int(properties[2])
+        return properties
 
-        # propertiest megcsinálni h ne listában lista legyne
+
+def count_grouped_by_genre(file_name):
+    with open(file_name) as data:
+        data_list = data.read().splitlines()
+        data_list = [item.split('\t') for item in data_list]
+        genre_dict = {}
+        genres = [item[3] for item in data_list]
+        for item in genres:
+            if item in genre_dict:
+                genre_dict[item] += 1
+            else:
+                genre_dict.update({item: 1})
+        return genre_dict
 
 
-print(get_game('game_stat.txt', 'Minecraft'))
+def get_date_ordered(file_name):
+    with open(file_name) as data:
+        data_list = data.read().splitlines()
+        data_list = [item.split('\t') for item in data_list]
+        date_ordered = sorted(data_list, key=lambda game: game[2], reverse=True)
+        for item in date_ordered:
+            for i in range(len(date_ordered) - 1):
+                if date_ordered[i][2] == date_ordered[i + 1][2]:
+                    same_release = [date_ordered[i][0], date_ordered[i + 1][0]]
+                    same_release.sort()
+                    date_ordered[i][0] = same_release[0]
+                    date_ordered[i + 1][0] = same_release[1]
+        date_ordered_games = [item[0] for item in date_ordered]
+        return date_ordered_games
+
+
+print(get_date_ordered('game_stat.txt'))
