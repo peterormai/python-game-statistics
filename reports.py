@@ -8,7 +8,7 @@ def decide(file_name, year):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        return bool(year in i for i in data_list)
+        return bool(year in [int(item[2]) for item in data_list])
 
 
 def get_latest(file_name):
@@ -67,7 +67,9 @@ def when_was_top_sold_fps(file_name):
         data_list = [item.split('\t') for item in data_list]
         list_of_given_genre = [item for item in data_list if item[3] == 'First-person shooter']
         top_sold_amount = max([float(item[1]) for item in list_of_given_genre])
+        top_sold_games_year = []
         for item in list_of_given_genre:
             if float(item[1]) == top_sold_amount:
-                return int(item[2])
+                top_sold_games_year.append(int(item[2]))
+        return min(top_sold_games_year)
         raise ValueError("Title doesn't exist!!")

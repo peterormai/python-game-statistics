@@ -19,7 +19,7 @@ def data_input_dict():
     return data_dict
 
 
-def export_answers(data_dict=default_data_dict):
+def exporter(data_dict):
     with open(data_dict['exported'], 'w') as file:
         file.write(reports.get_most_played(data_dict['data_file']) + "\n" +
                    str(reports.sum_sold(data_dict['data_file'])) + "\n" +
@@ -31,9 +31,20 @@ def export_answers(data_dict=default_data_dict):
                    str(reports.get_date_ordered(data_dict['data_file'])))
 
 
+def export_answers(data_dict=default_data_dict):
+    try:
+        exporter(data_dict)
+        print("Export was successfull!")
+    except UnboundLocalError:
+        data_dict['title'] = default_data_dict['title']
+        export_answers(data_dict)
+    except FileNotFoundError:
+        data_dict['exported'] = default_data_dict['exported']
+        export_answers(data_dict)
+
+
 def main():
     export_answers(data_input_dict())
-    print("Export was successfull!")
 
 
 if __name__ == '__main__':

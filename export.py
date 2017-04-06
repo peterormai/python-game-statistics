@@ -32,7 +32,7 @@ def top_sold_error(data_dict):
         return top_sold
 
 
-def export_answers(data_dict=default_data_dict):
+def exporter(data_dict=default_data_dict):
     with open(data_dict['exported'], 'w') as file:
         file.write(str(reports.count_games(data_dict['data_file'])) + "\n" +
                    str(reports.decide(data_dict['data_file'], data_dict['year'])) + "\n" +
@@ -44,17 +44,20 @@ def export_answers(data_dict=default_data_dict):
                    top_sold_error(data_dict))
 
 
-def title_handler(data_dict):
+def export_answers(data_dict):
     try:
-        export_answers(data_dict)
+        exporter(data_dict)
     except ValueError:
         print('The given title does not exist, please try again: ')
         data_dict['title'] = input("Give me the title I'll tell you which line it is in: ")
-        title_handler(data_dict)
+        export_answers(data_dict)
+    except FileNotFoundError:
+        data_dict['exported'] = "answers.txt"
+        export_answers(data_dict)
 
 
 def main():
-    title_handler(data_input_dict())
+    export_answers(data_input_dict())
     print("Export was successfull!")
 
 
