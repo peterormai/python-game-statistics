@@ -82,6 +82,3 @@ def get_date_ordered(file_name):
                     date_ordered[i + 1][0] = same_release[1]
         date_ordered_games = [item[0] for item in date_ordered]
         return date_ordered_games
-
-
-print(get_date_ordered('game_stat.txt'))
