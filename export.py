@@ -59,8 +59,8 @@ def exporter(export_file_name, *args):
     while export_name_valid:
         try:
             with open(export_file_name, 'w') as file:
-                for i in args:
-                    file.write(i + "\n")
+                for item in args:
+                    file.write(item + "\n")
             export_name_valid = 0
         except FileNotFoundError:
             export_file_name = 'answers.txt'
