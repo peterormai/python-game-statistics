@@ -49,7 +49,13 @@ def sort_abc(file_name):
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
         games = [item[0] for item in data_list]
-        games.sort()
+        shortest_name = min(games)
+        for item in games:
+            for i in range(len(games) - 1):
+                if games[i].lower() > games[i + 1].lower():
+                    changer = games[i]
+                    games[i] = games[i + 1]
+                    games[i + 1] = changer
         return games
 
 
