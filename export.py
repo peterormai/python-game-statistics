@@ -68,6 +68,7 @@ def exporter(export_file_name, *args):
 
 
 def main(data_file):
+    os.system('clear')
     exporter(export_name(),
              str(reports.count_games(data_file)),
              year_input(data_file),
