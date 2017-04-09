@@ -4,12 +4,6 @@ import os.path
 
 def data_input_name():
     import_name = input('Please, give me the name of the data file: ')
-    file_exist = 0
-    while file_exist == 0:
-        if not os.path.exists(import_name) or import_name == '.':
-            import_name = input('File does not exist, try again: ')
-        else:
-            file_exist = 1
     return import_name
 
 
@@ -68,4 +62,12 @@ def main(data_file):
 
 
 if __name__ == '__main__':
-    main(data_input_name())
+    os.system('clear')
+    import_valid = 1
+    while import_valid:
+        try:
+            main(data_input_name())
+            import_valid = 0
+        except FileNotFoundError:
+            print('File does not exist, try again!')
+            continue
