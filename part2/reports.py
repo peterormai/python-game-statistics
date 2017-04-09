@@ -76,9 +76,9 @@ def get_date_ordered(file_name):
         for item in date_ordered:
             for i in range(len(date_ordered) - 1):
                 if date_ordered[i][2] == date_ordered[i + 1][2]:
-                    same_release = [date_ordered[i][0], date_ordered[i + 1][0]]
-                    same_release.sort()
-                    date_ordered[i][0] = same_release[0]
-                    date_ordered[i + 1][0] = same_release[1]
+                    if date_ordered[i][0] > date_ordered[i + 1][0]:
+                        changer = date_ordered[i]
+                        date_ordered[i] = date_ordered[i + 1]
+                        date_ordered[i + 1] = changer
         date_ordered_games = [item[0] for item in date_ordered]
         return date_ordered_games
