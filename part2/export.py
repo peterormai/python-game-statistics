@@ -49,7 +49,7 @@ def main(data_file):
     exporter(export_name(),
              reports.get_most_played(data_file),
              str(reports.sum_sold(data_file)),
-             str(reports.get_selling_avg(data_file)),
+             str(round(reports.get_selling_avg(data_file), 2)),
              str(reports.count_longest_title(data_file)),
              str(reports.get_date_avg(data_file)),
              title_input(data_file),
