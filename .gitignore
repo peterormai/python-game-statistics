@@ -108,4 +108,7 @@ ENV/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+.vscode/launch.json
+.vscode/
+
 # End of https://www.gitignore.io/api/python,visualstudiocode
