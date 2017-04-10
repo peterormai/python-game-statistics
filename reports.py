@@ -8,7 +8,7 @@ def decide(file_name, year):
     with open(file_name) as data:
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
-        return bool(year in [int(item[2]) for item in data_list])
+        return year in [int(item[2]) for item in data_list]
 
 
 def get_latest(file_name):
@@ -49,7 +49,6 @@ def sort_abc(file_name):
         data_list = data.read().splitlines()
         data_list = [item.split('\t') for item in data_list]
         games = [item[0] for item in data_list]
-        shortest_name = min(games)
         for item in games:
             for i in range(len(games) - 1):
                 if games[i].lower() > games[i + 1].lower():
